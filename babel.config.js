@@ -17,6 +17,9 @@ module.exports = {
           '.tsx',
           '.json',
         ],
+        alias: {
+          'conic-gradient-package': './conic-gradient-package',
+        },
       },
     ],
     [
