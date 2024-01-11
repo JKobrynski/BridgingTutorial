@@ -17,6 +17,9 @@ module.exports = {
           '.tsx',
           '.json',
         ],
+        alias: {
+          'save-file-picker-package': './save-file-picker-package',
+        },
       },
     ],
     [
