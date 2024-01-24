@@ -6,5 +6,9 @@ module.exports = {
       // <--------- Add entry for "save-file-picker-package"
       root: path.resolve(__dirname, './save-file-picker-package'),
     },
+    'conic-gradient-package': {
+      // <--------- Add entry for "conic-gradient-package"
+      root: path.resolve(__dirname, './conic-gradient-package'),
+    },
   },
 };
