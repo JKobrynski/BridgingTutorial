@@ -13,7 +13,10 @@ class SaveFilePickerTurboPackage : TurboReactPackage() {
      * Initialize and export modules based on the name of the required module
      */
     override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-        return null
+        return when (name) {
+            SaveFilePickerModule.NAME -> SaveFilePickerModule(reactContext)
+            else -> null
+        }
     }
 
     /**
@@ -24,6 +27,7 @@ class SaveFilePickerTurboPackage : TurboReactPackage() {
          * Here declare the array of exported modules
          */
         val moduleList: Array<Class<out NativeModule?>> = arrayOf(
+                SaveFilePickerModule::class.java
         )
         val reactModuleInfoMap: MutableMap<String, ReactModuleInfo> = HashMap()
         /**
