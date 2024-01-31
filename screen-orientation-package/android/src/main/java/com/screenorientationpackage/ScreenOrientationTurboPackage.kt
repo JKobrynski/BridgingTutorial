@@ -13,7 +13,10 @@ class ScreenOrientationTurboPackage : TurboReactPackage() {
      * Initialize and export modules based on the name of the required module
      */
     override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-        return null
+        return when (name) {
+            ScreenOrientationModule.NAME -> ScreenOrientationModule(reactContext)
+            else -> null
+        }
     }
 
     /**
@@ -24,6 +27,7 @@ class ScreenOrientationTurboPackage : TurboReactPackage() {
          * Here declare the array of exported modules
          */
         val moduleList: Array<Class<out NativeModule?>> = arrayOf(
+                ScreenOrientationModule::class.java
         )
         val reactModuleInfoMap: MutableMap<String, ReactModuleInfo> = HashMap()
         /**
