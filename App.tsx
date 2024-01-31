@@ -1,45 +1,50 @@
-import React from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {SaveFilePickerModule} from 'save-file-picker-package';
+import React, {useEffect, useState} from 'react';
+import {
+  NativeEventEmitter,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {ScreenOrientationModule} from 'screen-orientation-package';
 
-const ASSETS_FILE_PATH = 'file.html';
+const moduleEventEmitter = new NativeEventEmitter(
+  Platform.OS === 'ios' ? ScreenOrientationModule : undefined,
+);
 
 function App(): JSX.Element {
-  const saveFileWithCallback = () => {
-    SaveFilePickerModule.saveFileWithCallback(ASSETS_FILE_PATH, result => {
-      console.log(result);
-    });
-  };
+  const [screenOrientation, setScreenOrientation] = useState<
+    'portrait' | 'landscape' | 'unknown'
+  >('unknown');
 
-  const saveFileWithPromise = async () => {
-    try {
-      const isSuccess = await SaveFilePickerModule.saveFileWithPromise(
-        ASSETS_FILE_PATH,
-      );
+  useEffect(() => {
+    const subscription = moduleEventEmitter.addListener(
+      'onScreenOrientationModuleChange',
+      ({orientation}: {orientation: 'portrait' | 'landscape' | 'unknown'}) => {
+        console.log({orientation});
+        setScreenOrientation(orientation);
+      },
+    );
 
-      console.log({isSuccess});
-    } catch (error) {
-      console.log({error});
-    }
-  };
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.header}>Save file picker</Text>
+        <Text style={styles.header}>Simple event module</Text>
         <View style={styles.body}>
-          <View style={styles.buttonWrapper}>
-            <Button
-              onPress={saveFileWithCallback}
-              title="Save file (Callback)"
-            />
-          </View>
-          <View style={styles.buttonWrapper}>
-            <Button onPress={saveFileWithPromise} title="Save file (Promise)" />
-          </View>
+          <Text style={styles.content}>
+            Constants: {JSON.stringify(ScreenOrientationModule.getConstants())}
+          </Text>
+          <Text style={styles.content}>
+            Screen orientation: {screenOrientation}
+          </Text>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -51,15 +56,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
-  buttonWrapper: {
-    alignSelf: 'stretch',
-    paddingVertical: 30,
-  },
   container: {
     alignItems: 'center',
     alignSelf: 'stretch',
     flex: 1,
     justifyContent: 'center',
+  },
+  content: {
+    fontSize: 20,
+    fontWeight: '600',
+    paddingVertical: 20,
   },
   header: {
     fontSize: 24,
