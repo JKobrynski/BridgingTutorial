@@ -1,54 +1,65 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import {ConicGradientView} from 'conic-gradient-package';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SaveFilePickerModule} from 'save-file-picker-package';
+
+const ASSETS_FILE_PATH = 'file.html';
 
 function App(): JSX.Element {
+  const saveFileWithCallback = () => {
+    SaveFilePickerModule.saveFileWithCallback(ASSETS_FILE_PATH, result => {
+      console.log(result);
+    });
+  };
+
+  const saveFileWithPromise = async () => {
+    try {
+      const isSuccess = await SaveFilePickerModule.saveFileWithPromise(
+        ASSETS_FILE_PATH,
+      );
+
+      console.log({isSuccess});
+    } catch (error) {
+      console.log({error});
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.header}>Conic Gradient</Text>
-        <ConicGradientView
-          colors={['blue', 'purple', 'red']}
-          locations={[0.1, 0.3, 0.8]}
-          centerPoint={{x: 0.45, y: 0.55}}
-          style={styles.gradient}>
-          <View style={styles.gradientChild}>
-            <Text style={styles.gradientChildText}>Child view</Text>
+        <Text style={styles.header}>Save file picker</Text>
+        <View style={styles.body}>
+          <View style={styles.buttonWrapper}>
+            <Button
+              onPress={saveFileWithCallback}
+              title="Save file (Callback)"
+            />
           </View>
-        </ConicGradientView>
+          <View style={styles.buttonWrapper}>
+            <Button onPress={saveFileWithPromise} title="Save file (Promise)" />
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  body: {
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  buttonWrapper: {
+    alignSelf: 'stretch',
+    paddingVertical: 30,
+  },
   container: {
     alignItems: 'center',
     alignSelf: 'stretch',
     flex: 1,
     justifyContent: 'center',
-  },
-  gradient: {
-    alignItems: 'center',
-    height: 250,
-    justifyContent: 'center',
-    overflow: 'hidden',
-    width: 250,
-  },
-  gradientChild: {
-    backgroundColor: 'rgba(100, 200, 250, 0.3)',
-    padding: 30,
-  },
-  gradientChildText: {
-    color: 'white',
-    fontSize: 16,
   },
   header: {
     fontSize: 24,

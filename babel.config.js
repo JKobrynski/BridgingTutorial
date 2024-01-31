@@ -18,6 +18,7 @@ module.exports = {
           '.json',
         ],
         alias: {
+          'save-file-picker-package': './save-file-picker-package',
           'conic-gradient-package': './conic-gradient-package',
         },
       },
