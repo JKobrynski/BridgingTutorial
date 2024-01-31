@@ -11,5 +11,8 @@ module.exports = {
     'range-slider-package': {
       root: path.resolve(__dirname, './range-slider-package'),
     },
+    'screen-orientation-package': {
+      root: path.resolve(__dirname, './screen-orientation-package'),
+    },
   },
 };
