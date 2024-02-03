@@ -78,4 +78,7 @@ dependencies {
     } else {
         implementation("com.facebook.react:react-native:+") // From node_modules
     }
+
+    // Add the dependency to the MaterialComponents library
+    implementation("com.google.android.material:material:1.8.0")
 }

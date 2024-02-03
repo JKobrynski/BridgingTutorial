@@ -21,6 +21,9 @@ Pod::Spec.new do |s|
   # This is crucial - declare which files will be included in the package (similar to "files" field in `package.json`)
   s.source_files    = "ios/**/*.{h,m,mm,swift}"
 
+  # Declare dependency (similar to entries under "dependencies" field in `package.json`)
+  s.dependency 'RangeUISlider', '~> 3.0'
+
   if new_arch_enabled
     s.pod_target_xcconfig = {
       "DEFINES_MODULE" => "YES",

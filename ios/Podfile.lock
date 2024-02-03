@@ -88,6 +88,7 @@ PODS:
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RangeSliderPackage (0.0.1):
+    - RangeUISlider (~> 3.0)
     - RCT-Folly (= 2021.07.22.00)
     - RCTRequired
     - RCTTypeSafety
@@ -96,6 +97,7 @@ PODS:
     - React-RCTFabric
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
+  - RangeUISlider (3.1.0)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -874,6 +876,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - RangeUISlider
     - SocketRocket
     - YogaKit
 
@@ -984,7 +987,8 @@ SPEC CHECKSUMS:
   hermes-engine: 0784cadad14b011580615c496f77e0ae112eed75
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  RangeSliderPackage: 9fb3026edea00815f5ccf56d8fbea89fa9ec5a66
+  RangeSliderPackage: 2fcd53a1f61555ba2ec471bb78931b3045fce76b
+  RangeUISlider: bb1a82942ef5b6315bd8bf1c12a6b953f0ed02e8
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: bd6045fbd511da5efe6db89eecb21e4e36bd7cbf
   RCTTypeSafety: c06d9f906faa69dd1c88223204c3a24767725fd8
@@ -1024,4 +1028,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d1bbc9221a8c0a307337c7ff125f0a4a30e49dcb
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.0
