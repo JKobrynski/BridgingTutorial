@@ -1,1 +1,1 @@
-export {default as DeviceBatteryModule} from './DeviceBatteryModule';
+export {default as DeviceBatteryModule} from './NativeDeviceBatteryModule';

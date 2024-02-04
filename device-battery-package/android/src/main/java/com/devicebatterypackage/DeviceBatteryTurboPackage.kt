@@ -1,5 +1,4 @@
-package com.appinfopackage
-
+package com.devicebatterypackage
 import com.facebook.react.TurboReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
@@ -13,7 +12,10 @@ class DeviceBatteryTurboPackage : TurboReactPackage() {
      * Initialize and export modules based on the name of the required module
      */
     override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-        return null
+        return when (name) {
+            DeviceBatteryModule.NAME -> DeviceBatteryModule(reactContext)
+            else -> null
+        }
     }
 
     /**
@@ -24,6 +26,7 @@ class DeviceBatteryTurboPackage : TurboReactPackage() {
          * Here declare the array of exported modules
          */
         val moduleList: Array<Class<out NativeModule?>> = arrayOf(
+                DeviceBatteryModule::class.java
         )
         val reactModuleInfoMap: MutableMap<String, ReactModuleInfo> = HashMap()
         /**
