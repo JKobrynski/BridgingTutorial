@@ -1,71 +1,63 @@
-import React, {useEffect, useState} from 'react';
-import {
-  NativeEventEmitter,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {ScreenOrientationModule} from 'screen-orientation-package';
-
-const moduleEventEmitter = new NativeEventEmitter(
-  Platform.OS === 'ios' ? ScreenOrientationModule : undefined,
-);
+import {RangeSliderView} from 'range-slider-package';
+import * as React from 'react';
+import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 function App(): JSX.Element {
-  const [screenOrientation, setScreenOrientation] = useState<
-    'portrait' | 'landscape' | 'unknown'
-  >('unknown');
+  const sliderRef = React.useRef<RangeSliderView>(null);
+  const [leftKnobValue, setLeftKnobValue] = React.useState(2);
+  const [rightKnobValue, setRightKnobValue] = React.useState(8);
 
-  useEffect(() => {
-    const subscription = moduleEventEmitter.addListener(
-      'onScreenOrientationModuleChange',
-      ({orientation}: {orientation: 'portrait' | 'landscape' | 'unknown'}) => {
-        console.log({orientation});
-        setScreenOrientation(orientation);
-      },
-    );
+  function resetLeftKnobValue() {
+    sliderRef.current?.setLeftKnobValueProgrammatically(2);
+  }
 
-    return () => {
-      subscription.remove();
-    };
-  }, []);
+  function resetRightKnobValue() {
+    sliderRef.current?.setRightKnobValueProgrammatically(8);
+  }
 
   return (
-    <View style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.header}>Simple event module</Text>
-        <View style={styles.body}>
-          <Text style={styles.content}>
-            Constants: {JSON.stringify(ScreenOrientationModule.getConstants())}
-          </Text>
-          <Text style={styles.content}>
-            Screen orientation: {screenOrientation}
-          </Text>
+        <Text style={styles.header}>Range Slider</Text>
+        <RangeSliderView
+          ref={sliderRef}
+          activeColor="pink"
+          inactiveColor="gray"
+          leftKnobValue={leftKnobValue}
+          minValue={0}
+          maxValue={10}
+          onRangeSliderViewBeginDrag={() => {
+            console.log('BEGIN_DRAG');
+          }}
+          onRangeSliderViewEndDrag={e => {
+            console.log('END_DRAG', e.nativeEvent);
+            setLeftKnobValue(e.nativeEvent.leftKnobValue ?? 2);
+            setRightKnobValue(e.nativeEvent.rightKnobValue ?? 8);
+          }}
+          onRangeSliderViewValueChange={e => {
+            console.log('CHANGE', e.nativeEvent);
+          }}
+          rightKnobValue={rightKnobValue}
+          style={styles.slider}
+        />
+        <View style={styles.buttonsContainer}>
+          <Button onPress={resetLeftKnobValue} title="Reset left knob" />
+          <Button onPress={resetRightKnobValue} title="Reset right knob" />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  body: {
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
+  buttonsContainer: {
+    margin: 40,
   },
   container: {
     alignItems: 'center',
     alignSelf: 'stretch',
     flex: 1,
     justifyContent: 'center',
-  },
-  content: {
-    fontSize: 20,
-    fontWeight: '600',
-    paddingVertical: 20,
   },
   header: {
     fontSize: 24,
@@ -76,6 +68,10 @@ const styles = StyleSheet.create({
   safeArea: {
     alignSelf: 'stretch',
     flex: 1,
+  },
+  slider: {
+    height: 40,
+    width: 250,
   },
 });
 

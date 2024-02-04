@@ -8,6 +8,9 @@ module.exports = {
     'conic-gradient-package': {
       root: path.resolve(__dirname, './conic-gradient-package'),
     },
+    'range-slider-package': {
+      root: path.resolve(__dirname, './range-slider-package'),
+    },
     'screen-orientation-package': {
       root: path.resolve(__dirname, './screen-orientation-package'),
     },
