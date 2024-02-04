@@ -22,6 +22,7 @@ module.exports = {
           'conic-gradient-package': './conic-gradient-package',
           'range-slider-package': './range-slider-package',
           'screen-orientation-package': './screen-orientation-package',
+          'device-battery-package': './device-battery-package',
         },
       },
     ],

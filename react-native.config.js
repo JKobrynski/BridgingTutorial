@@ -14,5 +14,8 @@ module.exports = {
     'screen-orientation-package': {
       root: path.resolve(__dirname, './screen-orientation-package'),
     },
+    'device-battery-package': {
+      root: path.resolve(__dirname, './device-battery-package'),
+    },
   },
 };
