@@ -17,5 +17,8 @@ module.exports = {
     'device-battery-package': {
       root: path.resolve(__dirname, './device-battery-package'),
     },
+    'battery-events-package': {
+      root: path.resolve(__dirname, './battery-events-package'),
+    },
   },
 };
