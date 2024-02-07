@@ -1,12 +1,25 @@
 import * as React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  NativeEventEmitter,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {DeviceBatteryModule} from './device-battery-package/src';
 import {getBatteryLevel} from 'react-native-device-info';
+import {BatteryEventsModule} from 'battery-events-package';
+
+const moduleEventEmitter = new NativeEventEmitter(
+  Platform.OS === 'ios' ? BatteryEventsModule : undefined,
+);
 
 function App(): JSX.Element {
   const [batteryLevel, setBatteryLevel] = React.useState<number>();
   const [libraryBatteryLevel, setLibraryBatteryLevel] =
     React.useState<number>();
+  const [eventBatteryLevel, setEventBatteryLevel] = React.useState<number>();
 
   React.useEffect(() => {
     setBatteryLevel(DeviceBatteryModule.getBatteryLevel());
@@ -15,12 +28,27 @@ function App(): JSX.Element {
     });
   }, []);
 
+  React.useEffect(() => {
+    const subscription = moduleEventEmitter.addListener(
+      'onBatteryLevelModuleChange',
+      event => {
+        setEventBatteryLevel(event);
+        console.log('** EVENT **', event);
+      },
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Text style={styles.header}>Battery Level</Text>
-        <Text>{batteryLevel}</Text>
-        <Text>{libraryBatteryLevel}</Text>
+        <Text>Module: {batteryLevel}</Text>
+        <Text>Library: {libraryBatteryLevel}</Text>
+        <Text>Event module: {eventBatteryLevel}</Text>
       </View>
     </SafeAreaView>
   );
