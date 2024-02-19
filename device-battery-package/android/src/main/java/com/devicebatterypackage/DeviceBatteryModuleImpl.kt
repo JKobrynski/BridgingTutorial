@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.BatteryManager
 import android.os.BatteryManager.BATTERY_PROPERTY_CAPACITY
 import android.os.Build
+import android.util.Log
 
 import com.facebook.react.bridge.ReactApplicationContext
 
