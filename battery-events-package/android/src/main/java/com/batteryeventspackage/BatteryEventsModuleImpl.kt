@@ -5,14 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.modules.core.DeviceEventManagerModule
-class PowerConnectionReceiver(reactContext: ReactApplicationContext): BroadcastReceiver() {
-    var mBatteryModule: BatteryEventsModuleImpl = BatteryEventsModuleImpl(reactContext)
-
+class PowerConnectionReceiver(private var batteryModuleImpl: BatteryEventsModuleImpl): BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        mBatteryModule.notifyBatteryStateChanged(intent)
+        batteryModuleImpl.notifyBatteryStateChanged(intent)
     }
 }
 
@@ -21,10 +18,6 @@ class BatteryEventsModuleImpl(
 ) {
     private var batteryStateReceiver: PowerConnectionReceiver? = null;
     private var batteryStatus: Intent? = null;
-
-    init {
-        Log.d("TEST_LOG", "test log")
-    }
 
     private fun sendEvent(eventName: String, params: Float) {
         reactContext
@@ -45,7 +38,7 @@ class BatteryEventsModuleImpl(
         if(batteryStateReceiver != null) {
             return
         }
-        batteryStateReceiver = PowerConnectionReceiver(reactContext)
+        batteryStateReceiver = PowerConnectionReceiver(this)
         val filter: IntentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         batteryStatus = reactContext.applicationContext.registerReceiver(batteryStateReceiver, filter)
     }
@@ -60,7 +53,6 @@ class BatteryEventsModuleImpl(
     }
 
     fun onInitialize() {
-        Log.d("onInitialize", "INITIALIZE")
         maybeRegisterReceiver()
     }
 
@@ -71,7 +63,6 @@ class BatteryEventsModuleImpl(
 
     companion object {
         const val EVENT_NAME = "onBatteryLevelModuleChange"
-        const val EVENT_KEY = "value"
         const val NAME = "BatteryEventsModule"
     }
 }

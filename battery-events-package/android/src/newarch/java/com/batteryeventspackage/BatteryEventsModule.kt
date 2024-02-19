@@ -1,6 +1,5 @@
 package com.batteryeventspackage
 
-import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.annotations.ReactModule
 
@@ -23,7 +22,6 @@ class BatteryEventsModule(
     override fun getName() = BatteryEventsModuleImpl.NAME
 
     override fun initialize() {
-        Log.d("TEST_LOG", "INITIALIZE")
         super.initialize()
         moduleImpl.onInitialize()
     }

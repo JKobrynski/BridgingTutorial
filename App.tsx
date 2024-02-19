@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   NativeEventEmitter,
-  Platform,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -11,9 +10,7 @@ import {DeviceBatteryModule} from './device-battery-package/src';
 import {getBatteryLevel} from 'react-native-device-info';
 import {BatteryEventsModule} from 'battery-events-package';
 
-const moduleEventEmitter = new NativeEventEmitter(
-  Platform.OS === 'ios' ? BatteryEventsModule : undefined,
-);
+const moduleEventEmitter = new NativeEventEmitter(BatteryEventsModule);
 
 function App(): JSX.Element {
   const [batteryLevel, setBatteryLevel] = React.useState<number>();
@@ -33,7 +30,6 @@ function App(): JSX.Element {
       'onBatteryLevelModuleChange',
       event => {
         setEventBatteryLevel(event);
-        console.log('** EVENT **', event);
       },
     );
 
