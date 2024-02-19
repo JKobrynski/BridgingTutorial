@@ -1,7 +1,25 @@
 PODS:
+  - BatteryEventsPackage (0.0.1):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-RCTFabric
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - ConicGradientPackage (0.0.1):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-RCTFabric
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+  - DeviceBatteryPackage (0.0.1):
     - RCT-Folly (= 2021.07.22.00)
     - RCTRequired
     - RCTTypeSafety
@@ -768,6 +786,8 @@ PODS:
     - React-jsi (= 0.71.5)
     - React-logger (= 0.71.5)
     - React-perflogger (= 0.71.5)
+  - RNDeviceInfo (10.12.0):
+    - React-Core
   - SaveFilePickerPackage (0.0.1):
     - RCT-Folly (= 2021.07.22.00)
     - RCTRequired
@@ -792,8 +812,10 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
+  - BatteryEventsPackage (from `../battery-events-package`)
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - ConicGradientPackage (from `../conic-gradient-package`)
+  - DeviceBatteryPackage (from `../device-battery-package`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -857,6 +879,7 @@ DEPENDENCIES:
   - React-rncore (from `../node_modules/react-native/ReactCommon`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - SaveFilePickerPackage (from `../save-file-picker-package`)
   - ScreenOrientationPackage (from `../screen-orientation-package`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -881,10 +904,14 @@ SPEC REPOS:
     - YogaKit
 
 EXTERNAL SOURCES:
+  BatteryEventsPackage:
+    :path: "../battery-events-package"
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   ConicGradientPackage:
     :path: "../conic-gradient-package"
+  DeviceBatteryPackage:
+    :path: "../device-battery-package"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -959,6 +986,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   SaveFilePickerPackage:
     :path: "../save-file-picker-package"
   ScreenOrientationPackage:
@@ -967,9 +996,11 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  BatteryEventsPackage: 9452e0ccf245ba0a12712a62662521bd85a58837
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   ConicGradientPackage: b2b800da5fb4fc6adb73ea8d15a0db6a2b7bb38c
+  DeviceBatteryPackage: c1b2c330a9f5deb035a4bebf481db51fd187e707
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: f1897022b53abf1469d6ad692ee2c69f57d967f3
   FBReactNativeSpec: a711904ec10a294fae6583d929778fed38558f92
@@ -1020,6 +1051,7 @@ SPEC CHECKSUMS:
   React-rncore: 273a426d06d30e97ccdbc548d447980693412743
   React-runtimeexecutor: 511f4301d85daf85abface9afb8d2df2d49f87d3
   ReactCommon: 4f43b72066f27bfe1f63838c61763f59e7112536
+  RNDeviceInfo: db5c64a060e66e5db3102d041ebe3ef307a85120
   SaveFilePickerPackage: eac7afece49b15784bd81d9dc20afa6d4a5520fd
   ScreenOrientationPackage: 6c59ee0c441820bf6b83c6b9d19d13b63c88906d
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
